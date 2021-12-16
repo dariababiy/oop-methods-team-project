@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit library</title>
+</head>
+<body>
+<a th:href="@{|/user/dashboard/${library.owner.id}|}">
+  << Dashboard
+</a>
+<h1>
+  Edit library
+</h1>
+<table>
+  <thead>
+  <tr>
+    <th>
+      Title
+    </th>
+    <th>
+      Genre
+    </th>
+    <th>
+      Year
+    </th>
+    <th>
+      Author
+    </th>
+    <th>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${library.books.empty}">
+    <td colspan="5">
+      No books available
+    </td>
+  </tr>
+  <tr th:each="book : ${library.books}">
+    <td>
+      <span th:text="${book.title}" />
+    </td>
+    <td>
+      <span th:text="${book.genre}" />
+    </td>
+    <td>
+      <span th:text="${book.year}" />
+    </td>
+    <td>
+      <span th:text="${book.author.fullName}" />
+    </td>
+    <td>
+      <a th:href="@{|/library/edit/${library.id}/remove/${book.id}|}">Remove</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display library</title>
+</head>
+<body>
+    <a th:href="@{|/user/dashboard/${library.owner.id}|}">
+        << Dashboard
+    </a>
+    <h1>
+        Books
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Genre
+                </th>
+                <th>
+                    Year
+                </th>
+                <th>
+                    Author
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${library.books.empty}">
+                <td colspan="4">
+                    No books available
+                </td>
+            </tr>
+            <tr th:each="book : ${library.books}">
+                <td>
+                    <span th:text="${book.title}" />
+                </td>
+                <td>
+                    <span th:text="${book.genre}" />
+                </td>
+                <td>
+                    <span th:text="${book.year}" />
+                </td>
+                <td>
+                    <span th:text="${book.author.fullName}" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>
+        Authors
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Date of Birth
+                </th>
+                <th>
+                    Lang
+                </th>
+                <th>
+                    Country
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${library.authors.empty}">
+                <td colspan="4">
+                    No authors available
+                </td>
+            </tr>
+            <tr th:each="author : ${library.authors}">
+                <td>
+                    <span th:text="${author.fullName}" />
+                </td>
+                <td>
+                    <span th:text="${author.birthDay}" />
+                </td>
+                <td>
+                    <span th:text="${author.lang}" />
+                </td>
+                <td>
+                    <span th:text="${author.country}" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

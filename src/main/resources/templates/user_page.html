@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Account page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<a th:href="@{/user/login}">
+  << Logout
+</a>
+<h1>Dashboard</h1>
+<p th:if="${user.role == T(com.example.oop.methods.team.model.UserRole).SUPER_ADMIN}">
+  Hello, the Super Admin
+</p>
+<p th:unless="${user.role == T(com.example.oop.methods.team.model.UserRole).SUPER_ADMIN}"
+   th:text="'Hello, ' + ${user.username}">
+</p>
+
+<p th:if="${user.role == T(com.example.oop.methods.team.model.UserRole).SUPER_ADMIN}">
+  Here you can edit all the data in the application.
+</p>
+<p th:unless="${user.role == T(com.example.oop.methods.team.model.UserRole).SUPER_ADMIN}">
+  Here you can review and edit your library.
+</p>
+
+<p>
+  Select one of the following actions:
+</p>
+<ul>
+  <li>
+    <a th:href="@{|/library/display/${user.id}|}">
+      View personal library
+    </a>
+  </li>
+  <li>
+    <a th:href="@{|/library/edit/${user.id}|}">
+      Edit personal library
+    </a>
+  </li>
+  <li>
+    <a th:href="@{|/library/display/global/${user.id}|}">
+      View global library
+    </a>
+  </li>
+  <li th:if="${user.role == T(com.example.oop.methods.team.model.UserRole).SUPER_ADMIN}">
+    <a th:href="@{/library/edit/global}">
+      Edit global library
+    </a>
+  </li>
+</ul>
+</body>
+</html>
